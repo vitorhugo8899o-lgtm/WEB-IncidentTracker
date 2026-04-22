@@ -22,9 +22,9 @@ const LandingPage = () => {
 
         <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
           <a href="#sobre" className="hover:text-blue-500 transition">Sobre</a>
-          <button className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition text-xs font-bold uppercase tracking-wider">
-            Cadastrar
-          </button>
+          <a href="/Login" className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition text-xs font-bold uppercase tracking-wider">
+            Cadastre-se
+          </a>
         </div>
       </nav>
 
