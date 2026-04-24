@@ -1,11 +1,14 @@
 import { ArrowLeft, EyeOff, Lock, Mail } from "lucide-react";
 import React, { useState } from "react";
 import { LoginUser } from "../services/UsersServices";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
 	const [userEmail, setEmail] = useState("");
 	const [userPassword, setPassword] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
+
+	const navigate = useNavigate();
 
 	const CheckField = async (e) => {
 		e.preventDefault();
@@ -22,6 +25,7 @@ const LoginPage = () => {
 			};
 
 			await LoginUser(data);
+			navigate("/Home")
 		} catch (error) {
 			const friendlyMessage = error.message || "Ocorreu um erro desconhecido.";
 			setErrorMessage(friendlyMessage);

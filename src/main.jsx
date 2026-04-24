@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.jsx";
 import LoginPage from "./pages/Login.jsx";
 import RegisterPage from "./pages/UserCreate.jsx";
+import HomeNexusTracker from "./pages/Home.jsx";
 
 const routers = createBrowserRouter([
 	{
@@ -19,6 +20,10 @@ const routers = createBrowserRouter([
 		path: "/contas/criar",
 		element: <RegisterPage />,
 	},
+	{
+		path: "/Home",
+		element: <HomeNexusTracker />
+	}
 ]);
 
 createRoot(document.getElementById("root")).render(
