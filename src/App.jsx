@@ -24,19 +24,19 @@ const LandingPage = () => {
 					</span>
 				</div>
 
-				<div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-					<a href="#sobre" className="hover:text-blue-500 transition">
+				<div className="flex items-center gap-4 md:gap-8 text-sm font-medium">
+					<a href="#sobre" className="hidden md:block text-gray-300 hover:text-blue-500 transition">
 						Sobre
 					</a>
+
 					<a
 						href="/Login"
-						className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg transition text-xs font-bold uppercase tracking-wider"
+						className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 md:px-5 md:py-2 rounded-lg transition text-[10px] md:text-xs font-bold uppercase tracking-wider"
 					>
 						Cadastre-se
 					</a>
 				</div>
 			</nav>
-
 			<section className="relative max-w-7xl mx-auto px-8 py-20 flex flex-col lg:flex-row items-center gap-12">
 				<div className="flex-1 z-10 text-center lg:text-left">
 					<span className="text-blue-500 font-bold text-xs uppercase tracking-[0.2em] mb-4 block">
@@ -55,7 +55,7 @@ const LandingPage = () => {
 
 				<div className="flex-1 relative">
 					<div className="relative z-10 rounded-2xl overflow-hidden border border-gray-800 bg-[#0a1120] p-4 shadow-2xl">
-						<div className="aspect-square bg-gradient-to-br from-blue-900/20 to-transparent flex items-center justify-center overflow-hidden rounded-xl">
+						<div className="aspect-square bg-linear-to-br from-blue-900/20 to-transparent flex items-center justify-center overflow-hidden rounded-xl">
 							<img
 								src="./src/imagens/smile-man.png"
 								alt="Especialista Nexus Tracker"
