@@ -70,7 +70,6 @@ const HomeNexusTracker = () => {
 
     const handleCriarChamado = (e) => {
         e.preventDefault();
-        // Lógica para disparar o POST da API aqui
         alert("Chamado enviado com sucesso!");
         setActiveTab('chamados');
     };
@@ -78,7 +77,7 @@ const HomeNexusTracker = () => {
     return (
         <div className="flex h-screen bg-[#080B12] text-slate-200 font-sans">
 
-            {/* Menu Lateral Restaurado */}
+            {/* Menu Lateral*/}
             <aside className="w-64 bg-[#0d121c] border-r border-slate-800 flex flex-col justify-between">
                 <div>
                     {/* Logo */}
@@ -122,7 +121,6 @@ const HomeNexusTracker = () => {
                 </div>
             </aside>
 
-            {/* Conteúdo Principal */}
             <main className="flex-1 p-8 overflow-y-auto">
                 <header className="mb-8">
                     <h1 className="text-3xl font-bold text-white">
