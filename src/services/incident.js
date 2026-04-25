@@ -20,6 +20,19 @@ async function CreateIncident(data) {
     }
 }
 
+
+async function DeleteIncident(id_incident) {
+    try {
+        const response = await api(`api/v1/incidents/${id_incident}`, {
+            method: "DELETE",
+            credentials: 'include'
+        })
+    } catch (error) {
+        throw new Error(error.message || "Erro de conexão com o servidor.");
+    }
+}
+
+
 async function GetIncidents() {
     try {
         const response = await api("/api/v1/user_incidents", {
