@@ -65,7 +65,14 @@ async function QueryIncidents(offset, limit, status, priority, create_at, creato
     return response
 }
 
+async function GetHistoryIncident(id_incident) {
+    const response = await api(`/api/v1/incidents/history/${id_incident}`, {
+        method: "GET",
+        credentials: "include"
+    })
 
+    return response
+}
 
 
 export { GetIncidents, CreateIncident };
