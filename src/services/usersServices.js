@@ -59,4 +59,17 @@ async function CreateUser(data) {
 	}
 }
 
-export { CreateUser, LoginUser };
+async function DeleteUser(id_user) {
+	try {
+		const response = await api("/api/v1/users/disable", {
+			method: "POST",
+			credentials: 'include'
+		})
+
+		return response
+	} catch (error) {
+		throw new Error(error.message || "Erro ao deletar conta.")
+	}
+}
+
+export { CreateUser, LoginUser, DeleteUser };
