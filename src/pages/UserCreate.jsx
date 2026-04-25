@@ -1,12 +1,16 @@
 import { ArrowLeft, Lock, Mail, ShieldCheck, User } from "lucide-react";
 import React, { useState } from "react";
-import { CreateUser } from "../services/UsersServices";
+import { CreateUser, LoginUser } from "../services/UsersServices";
+import { replace, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
 	const [userEmail, setEmail] = useState("");
 	const [userPassword, setPassword] = useState("");
 	const [userCPF, setCPF] = useState("");
 	const [errorMessage, setErrorMessage] = useState("");
+
+	const navigate = useNavigate();
+
 
 	const CheckField = async (e) => {
 		e.preventDefault();
@@ -41,6 +45,8 @@ const RegisterPage = () => {
 		try {
 			const data = { email: userEmail, password: userPassword, cpf: cleanCPF };
 			await CreateUser(data);
+			await LoginUser(data);
+			navigate("/Home", { replace: true })
 		} catch (error) {
 			setErrorMessage(error.message);
 		}
