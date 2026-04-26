@@ -6,11 +6,14 @@ import {
     LogOut,
     Trash2,
     AlertCircle,
-    Loader2
+    Loader2,
+    Users,
+    UserMinus
 } from 'lucide-react';
 import { GetIncidents, CreateIncident } from '../services/incident';
 import { DeleteUser, Logout } from '../services/usersServices';
 import { useNavigate } from "react-router-dom";
+import { getCookie } from '../services/Technician';
 
 
 const HomeNexusTracker = () => {
@@ -23,6 +26,12 @@ const HomeNexusTracker = () => {
     const [novaDescricao, setNovaDescricao] = useState('');
 
     const navigate = useNavigate();
+
+    const userRole = getCookie('Info_Role');
+
+    const isTechnicalStaff = userRole === 'UserRole.TECHNICIAN' || userRole === 'UserRole.SUPERVISOR';
+
+    const isSupervisor = userRole === 'UserRole.SUPERVISOR';
 
     useEffect(() => {
         const carregarChamados = async () => {
@@ -128,6 +137,65 @@ const HomeNexusTracker = () => {
                             <PlusCircle size={20} />
                             <span className="font-medium">Criar Chamado</span>
                         </button>
+
+                        {isTechnicalStaff && (
+                            <div className="pt-4 mt-4 border-t border-slate-800/50 space-y-2">
+                                <p className="px-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Área Técnica</p>
+
+                                <button
+                                    onClick={() => navigate("/resolver-chamado")}
+                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-blue-400 transition-colors"
+                                >
+                                    <LayoutList size={20} />
+                                    <span className="font-medium">Resolver Chamado</span>
+                                </button>
+
+                                <button
+                                    onClick={() => navigate("/buscar-chamado")}
+                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-blue-400 transition-colors"
+                                >
+                                    <PlusCircle size={20} />
+                                    <span className="font-medium">Buscar Chamado</span>
+                                </button>
+
+                                <button
+                                    onClick={() => navigate("/metricas")}
+                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-blue-400 transition-colors"
+                                >
+                                    <LayoutList size={20} />
+                                    <span className="font-medium">Minhas Métricas</span>
+                                </button>
+
+                                <button
+                                    onClick={() => navigate("/historico")}
+                                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-blue-400 transition-colors"
+                                >
+                                    <LayoutList size={20} />
+                                    <span className="font-medium">Histórico</span>
+                                </button>
+
+                                {isSupervisor && (
+                                    <>
+                                        <div className="pt-2 mt-2 border-t border-slate-800/30"></div>
+                                        <button
+                                            onClick={() => navigate("/buscar-usuario")}
+                                            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-amber-400 transition-colors"
+                                        >
+                                            <Users size={20} />
+                                            <span className="font-medium">Buscar Usuário</span>
+                                        </button>
+
+                                        <button
+                                            onClick={() => navigate("/desabilitar-usuario")}
+                                            className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-red-400 transition-colors"
+                                        >
+                                            <UserMinus size={20} />
+                                            <span className="font-medium">Desabilitar Usuário</span>
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+                        )}
                     </nav>
                 </div>
 
