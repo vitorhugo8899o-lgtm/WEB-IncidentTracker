@@ -60,6 +60,21 @@ async function CreateUser(data) {
 	}
 }
 
+
+async function Logout() {
+	try {
+		const response = await api("/api/v1/Logout", {
+			method: "POST",
+			credentials: 'include'
+		})
+		return response
+
+	} catch (error) {
+		throw new Error(error.message || "Erro ao deslogar usuário")
+	}
+}
+
+
 async function DeleteUser() {
 	try {
 		const response = await api("/api/v1/users/disable", {
@@ -73,4 +88,4 @@ async function DeleteUser() {
 	}
 }
 
-export { CreateUser, LoginUser, DeleteUser };
+export { CreateUser, LoginUser, DeleteUser, Logout };

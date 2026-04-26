@@ -9,7 +9,7 @@ import {
     Loader2
 } from 'lucide-react';
 import { GetIncidents, CreateIncident } from '../services/incident';
-import { DeleteUser } from '../services/usersServices';
+import { DeleteUser, Logout } from '../services/usersServices';
 import { useNavigate } from "react-router-dom";
 
 
@@ -89,6 +89,17 @@ const HomeNexusTracker = () => {
         setActiveTab('chamados');
     };
 
+    const LogoutUser = async (e) => {
+        e.preventDefault()
+
+        const confirmar = window.confirm("Deseja sair? após a confirmação se desejar entrar novamente terá de realizar o login novamente.")
+        if (confirmar) {
+            const response = await Logout()
+            alert(`${response}`)
+            navigate("/")
+        }
+    }
+
     return (
         <div className="flex h-screen bg-[#080B12] text-slate-200 font-sans">
 
@@ -129,7 +140,9 @@ const HomeNexusTracker = () => {
                         <UserX size={20} />
                         <span className="font-medium">Desativar Conta</span>
                     </button>
-                    <button className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-slate-400 hover:bg-slate-800/50 hover:text-slate-200">
+                    <button
+                        onClick={LogoutUser}
+                        className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-slate-400 hover:bg-slate-800/50 hover:text-slate-200">
                         <LogOut size={20} />
                         <span className="font-medium">Sair</span>
                     </button>
