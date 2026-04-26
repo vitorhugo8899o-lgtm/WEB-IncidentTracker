@@ -8,7 +8,10 @@ import {
     AlertCircle,
     Loader2
 } from 'lucide-react';
-import { GetIncidents } from '../services/incident';
+import { GetIncidents, CreateIncident } from '../services/incident';
+import { DeleteUser } from '../services/usersServices';
+import { useNavigate } from "react-router-dom";
+
 
 const HomeNexusTracker = () => {
     const [activeTab, setActiveTab] = useState('chamados');
@@ -18,6 +21,8 @@ const HomeNexusTracker = () => {
 
     const [novoTitulo, setNovoTitulo] = useState('');
     const [novaDescricao, setNovaDescricao] = useState('');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const carregarChamados = async () => {
@@ -61,15 +66,25 @@ const HomeNexusTracker = () => {
         setChamados(chamados.filter(chamado => chamado.id !== id));
     };
 
-    const handleDesativarConta = () => {
+    async function handleDelete() {
         const confirmar = window.confirm("Tem certeza que deseja desativar sua conta? Esta ação não pode ser desfeita.");
-        if (confirmar) {
-            alert("Conta desativada com sucesso.");
-        }
-    };
 
-    const handleCriarChamado = (e) => {
+        if (confirmar) {
+            const response = await DeleteUser()
+            alert(`${response}`);
+            navigate("/", { replace: true })
+        }
+    }
+
+    const handleCriarChamado = async (e) => {
         e.preventDefault();
+
+        const data = {
+            'title': novoTitulo,
+            'description': novaDescricao,
+        }
+
+        await CreateIncident(data)
         alert("Chamado enviado com sucesso!");
         setActiveTab('chamados');
     };
@@ -108,7 +123,7 @@ const HomeNexusTracker = () => {
                 {/* Ações de Conta */}
                 <div className="p-4 border-t border-slate-800 space-y-2">
                     <button
-                        onClick={handleDesativarConta}
+                        onClick={handleDelete}
                         className="w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-red-400 hover:bg-red-950/30 hover:text-red-300"
                     >
                         <UserX size={20} />

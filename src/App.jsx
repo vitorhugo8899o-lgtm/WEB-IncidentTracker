@@ -30,7 +30,7 @@ const LandingPage = () => {
 					</a>
 
 					<a
-						href="/Login"
+						href="/contas/criar"
 						className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 md:px-5 md:py-2 rounded-lg transition text-[10px] md:text-xs font-bold uppercase tracking-wider"
 					>
 						Cadastre-se

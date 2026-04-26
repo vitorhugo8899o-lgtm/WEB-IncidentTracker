@@ -20,22 +20,19 @@ const LoginPage = () => {
 		}
 		try {
 			const data = {
-				email: `${userEmail}`,
-				password: `${userPassword}`,
+				email: userEmail,
+				password: userPassword,
 			};
-
 			await LoginUser(data);
-			navigate("/Home")
+			navigate("/Home", { replace: true });
 		} catch (error) {
-			const friendlyMessage = error.message || "Ocorreu um erro desconhecido.";
-			setErrorMessage(friendlyMessage);
+			setErrorMessage(error.message);
 		}
 	};
-
 	return (
 		<div className="min-h-screen bg-[#050a15] text-white font-sans flex flex-col items-center justify-center px-6">
 			{errorMessage && (
-				<div className="bg-red-700 text-white p-3 mb-4 w-full max-w-sm sm:max-w-md rounded-md text-center font-semibold ">
+				<div className="bg-red-700 text-white p-3 mb-4 w-full max-w-md rounded-md text-center font-semibold animate-pulse">
 					{errorMessage}
 				</div>
 			)}

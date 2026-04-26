@@ -17,13 +17,15 @@ async function LoginUser(data) {
 			},
 			method: "POST",
 			body: formBody,
+			credentials: 'include'
 		});
+		return response;
 	} catch (error) {
 		let errorMessage = "Erro de conexão com o servidor. Tente novamente.";
 
 		if (error.response) {
 			const status = error.response.status;
-			const detail = error.response.data.detail;
+			const detail = error.response.data?.detail;
 
 			if (status === 401) {
 				errorMessage = "Login ou senha incorretos. Verifique suas credenciais.";
@@ -31,8 +33,10 @@ async function LoginUser(data) {
 				errorMessage = detail;
 			}
 		}
+		throw new Error(errorMessage);
 	}
 }
+
 
 async function CreateUser(data) {
 	const payload = {
@@ -51,12 +55,22 @@ async function CreateUser(data) {
 			method: "POST",
 			body: JSON.stringify(payload),
 		});
-
-		await LoginUser({ email: data.email, password: data.password });
-		return response;
 	} catch (error) {
 		throw new Error(error.message || "Erro de conexão com o servidor.");
 	}
 }
 
-export { CreateUser, LoginUser };
+async function DeleteUser() {
+	try {
+		const response = await api("/api/v1/users/disable", {
+			method: "POST",
+			credentials: 'include'
+		})
+
+		return response
+	} catch (error) {
+		throw new Error(error.message || "Erro ao deletar conta.")
+	}
+}
+
+export { CreateUser, LoginUser, DeleteUser };
