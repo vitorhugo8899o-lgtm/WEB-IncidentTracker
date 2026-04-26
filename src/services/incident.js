@@ -5,6 +5,8 @@ async function CreateIncident(data) {
     const payload = {
         title: data.title,
         description: data.description,
+        "priority": "low",
+        "status": "open"
     }
 
     try {
@@ -13,6 +15,7 @@ async function CreateIncident(data) {
             credentials: 'include',
             body: JSON.stringify(payload)
         })
+
 
         return response
     } catch (error) {

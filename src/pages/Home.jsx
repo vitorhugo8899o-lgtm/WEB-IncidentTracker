@@ -8,7 +8,7 @@ import {
     AlertCircle,
     Loader2
 } from 'lucide-react';
-import { GetIncidents } from '../services/incident';
+import { GetIncidents, CreateIncident } from '../services/incident';
 import { DeleteUser } from '../services/usersServices';
 import { useNavigate } from "react-router-dom";
 
@@ -76,8 +76,15 @@ const HomeNexusTracker = () => {
         }
     }
 
-    const handleCriarChamado = (e) => {
+    const handleCriarChamado = async (e) => {
         e.preventDefault();
+
+        const data = {
+            'title': novoTitulo,
+            'description': novaDescricao,
+        }
+
+        await CreateIncident(data)
         alert("Chamado enviado com sucesso!");
         setActiveTab('chamados');
     };
