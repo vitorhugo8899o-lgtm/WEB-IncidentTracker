@@ -8,7 +8,7 @@ import {
     AlertCircle,
     Loader2
 } from 'lucide-react';
-import { GetIncidents, CreateIncident } from '../services/incident';
+import { GetIncidents, CreateIncident, DeleteIncident } from '../services/incident';
 import { DeleteUser, Logout } from '../services/usersServices';
 import { useNavigate } from "react-router-dom";
 
@@ -62,8 +62,21 @@ const HomeNexusTracker = () => {
         }
     };
 
-    const handleDeletarChamado = (id) => {
-        setChamados(chamados.filter(chamado => chamado.id !== id));
+    const handleDeletarChamado = async (id) => {
+        const confirmar = window.confirm("Tem certeza que deseja excluir este incidente?");
+
+        if (!confirmar) return;
+
+        try {
+            await DeleteIncident(id);
+
+            setChamados(prevChamados => prevChamados.filter(chamado => chamado.id !== id));
+
+            alert("Incidente excluído com sucesso!");
+        } catch (error) {
+            console.error("Erro ao deletar:", error);
+            alert("Não foi possível excluir o incidente. Tente novamente.");
+        }
     };
 
     async function handleDelete() {

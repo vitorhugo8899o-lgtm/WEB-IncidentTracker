@@ -26,7 +26,7 @@ async function CreateIncident(data) {
 
 async function DeleteIncident(id_incident) {
     try {
-        const response = await api(`api/v1/incidents/${id_incident}`, {
+        const response = await api(`/api/v1/incidents/${id_incident}`, {
             method: "DELETE",
             credentials: 'include'
         })
@@ -78,4 +78,4 @@ async function GetHistoryIncident(id_incident) {
 }
 
 
-export { GetIncidents, CreateIncident };
+export { GetIncidents, CreateIncident, DeleteIncident };
