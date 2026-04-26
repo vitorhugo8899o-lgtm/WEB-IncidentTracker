@@ -7,6 +7,7 @@ import LoginPage from "./pages/Login.jsx";
 import RegisterPage from "./pages/UserCreate.jsx";
 import HomeNexusTracker from "./pages/Home.jsx";
 import FetchCall from "./pages/FetchCall.jsx";
+import ResolverChamado from "./pages/ResolveIncident.jsx";
 
 const routers = createBrowserRouter([
 	{
@@ -28,6 +29,10 @@ const routers = createBrowserRouter([
 	{
 		path: "/buscar-chamado",
 		element: <FetchCall />
+	},
+	{
+		path: "/resolver-chamado",
+		element: <ResolverChamado />
 	}
 ]);
 
