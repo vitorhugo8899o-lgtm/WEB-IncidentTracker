@@ -174,7 +174,7 @@ const HomeNexusTracker = () => {
                                     className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-blue-400 transition-colors"
                                 >
                                     <PlusCircle size={20} />
-                                    <span className="font-medium">Visualizar Chamados</span>
+                                    <span className="font-medium">Buscar Chamados</span>
                                 </button>
 
                                 <button

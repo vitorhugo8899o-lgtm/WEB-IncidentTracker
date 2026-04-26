@@ -6,6 +6,7 @@ import App from "./App.jsx";
 import LoginPage from "./pages/Login.jsx";
 import RegisterPage from "./pages/UserCreate.jsx";
 import HomeNexusTracker from "./pages/Home.jsx";
+import FetchCall from "./pages/FetchCall.jsx";
 
 const routers = createBrowserRouter([
 	{
@@ -23,6 +24,10 @@ const routers = createBrowserRouter([
 	{
 		path: "/Home",
 		element: <HomeNexusTracker />
+	},
+	{
+		path: "/buscar-chamado",
+		element: <FetchCall />
 	}
 ]);
 
