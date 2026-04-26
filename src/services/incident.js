@@ -30,6 +30,8 @@ async function DeleteIncident(id_incident) {
             method: "DELETE",
             credentials: 'include'
         })
+
+        return response;
     } catch (error) {
         throw new Error(error.message || "Erro de conexão com o servidor.");
     }
@@ -78,4 +80,4 @@ async function GetHistoryIncident(id_incident) {
 }
 
 
-export { GetIncidents, CreateIncident };
+export { GetIncidents, CreateIncident, DeleteIncident };
