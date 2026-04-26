@@ -52,7 +52,7 @@ async function GetIncidents() {
     }
 }
 
-async function QueryIncidents(offset, limit, status, priority, create_at, creator) {
+async function QueryIncidents(filtros) {
     const params = new URLSearchParams();
 
     if (filtros.offset != null) params.append("offset", filtros.offset);
@@ -67,8 +67,23 @@ async function QueryIncidents(offset, limit, status, priority, create_at, creato
         credentials: 'include'
     })
 
-    return response
+    return response;
 }
+
+
+async function ResolveIncident(id_incident) {
+    try {
+        const response = await api(`api/v1/incidents/${id_incident}`, {
+            method: "PUT",
+            credentials: 'include'
+        })
+
+        return response;
+    } catch (error) {
+        throw new Error(error.message || "Erro de conexão com o servidor.");
+    }
+}
+
 
 async function GetHistoryIncident(id_incident) {
     const response = await api(`/api/v1/incidents/history/${id_incident}`, {
@@ -80,4 +95,4 @@ async function GetHistoryIncident(id_incident) {
 }
 
 
-export { GetIncidents, CreateIncident, DeleteIncident };
+export { GetIncidents, CreateIncident, DeleteIncident, QueryIncidents };
