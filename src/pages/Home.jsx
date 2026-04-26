@@ -14,6 +14,7 @@ import { GetIncidents, CreateIncident } from '../services/incident';
 import { DeleteUser, Logout } from '../services/usersServices';
 import { useNavigate } from "react-router-dom";
 import { getCookie } from '../services/Technician';
+import { DeleteIncident } from '../services/incident';
 
 
 const HomeNexusTracker = () => {
@@ -71,8 +72,21 @@ const HomeNexusTracker = () => {
         }
     };
 
-    const handleDeletarChamado = (id) => {
-        setChamados(chamados.filter(chamado => chamado.id !== id));
+    const handleDeletarChamado = async (id) => {
+        const confirmar = window.confirm("Tem certeza que deseja excluir este chamado?");
+
+        if (confirmar) {
+            try {
+                await DeleteIncident(id);
+
+                setChamados(chamados.filter(chamado => chamado.id !== id));
+
+                alert("Chamado excluído com sucesso!");
+            } catch (error) {
+                console.error("Erro ao excluir:", error);
+                alert("Não foi possível excluir o chamado. Tente novamente.");
+            }
+        }
     };
 
     async function handleDelete() {
@@ -93,8 +107,13 @@ const HomeNexusTracker = () => {
             'description': novaDescricao,
         }
 
-        await CreateIncident(data)
-        alert("Chamado enviado com sucesso!");
+        if (novaDescricao.length < 15 || novoTitulo.length < 10) {
+            alert("Atenção: sua descrição ou título estão muito curtos. Para melhorar a qualidade do conteúdo, a descrição deve ter pelo menos 15 caracteres e o título, no mínimo, 10 caracteres.")
+            return;
+        }
+
+        const response = await CreateIncident(data)
+        alert("Chamado Criado com sucesso!");
         setActiveTab('chamados');
     };
 
@@ -155,7 +174,7 @@ const HomeNexusTracker = () => {
                                     className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-blue-400 transition-colors"
                                 >
                                     <PlusCircle size={20} />
-                                    <span className="font-medium">Buscar Chamado</span>
+                                    <span className="font-medium">Visualizar Chamados</span>
                                 </button>
 
                                 <button
