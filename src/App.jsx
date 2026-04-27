@@ -10,6 +10,7 @@ import {
 	UserCircle,
 } from "lucide-react";
 import React from "react";
+import smileman from "../src/imagens/smile-man.png"
 
 const LandingPage = () => {
 	return (
@@ -57,7 +58,7 @@ const LandingPage = () => {
 					<div className="relative z-10 rounded-2xl overflow-hidden border border-gray-800 bg-[#0a1120] p-4 shadow-2xl">
 						<div className="aspect-square bg-linear-to-br from-blue-900/20 to-transparent flex items-center justify-center overflow-hidden rounded-xl">
 							<img
-								src="./src/imagens/smile-man.png"
+								src={smileman}
 								alt="Especialista Nexus Tracker"
 								className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
 							/>
