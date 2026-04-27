@@ -39,18 +39,13 @@ async function GetMetrics() {
 
 async function GetIncidentInvolved() {
     try {
-        const response = api("/api/v1/tech/history_incident", {
+        const response = await api("/api/v1/tech/history_incident/", {
             method: "GET",
             credentials: 'include'
-        })
-
-        if (!response.ok) {
-            throw new Error("Erro ao buscar métricas");
-        }
-
+        });
         return response;
     } catch (error) {
-        throw new Error(error.message || "Erro de conexão com o servidor.");
+        throw new Error(error.message || "Erro ao carregar histórico.");
     }
 }
 
