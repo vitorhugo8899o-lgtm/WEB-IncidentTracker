@@ -1,6 +1,6 @@
 import { ArrowLeft, EyeOff, Lock, Mail } from "lucide-react";
 import React, { useState } from "react";
-import { LoginUser } from "../services/UsersServices";
+import { LoginUser } from "../services/usersServices";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
