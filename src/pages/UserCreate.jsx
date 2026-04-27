@@ -1,6 +1,6 @@
 import { ArrowLeft, Lock, Mail, ShieldCheck, User } from "lucide-react";
 import React, { useState } from "react";
-import { CreateUser, LoginUser } from "../services/UsersServices";
+import { CreateUser, LoginUser } from "../services/usersServices";
 import { replace, useNavigate } from "react-router-dom";
 
 const RegisterPage = () => {
