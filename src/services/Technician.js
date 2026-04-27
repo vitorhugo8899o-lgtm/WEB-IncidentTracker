@@ -39,19 +39,39 @@ async function GetMetrics() {
 
 async function GetIncidentInvolved() {
     try {
-        const response = api("/api/v1/tech/history_incident", {
+        const response = await api("/api/v1/tech/history_incident/", {
             method: "GET",
             credentials: 'include'
-        })
-
-        if (!response.ok) {
-            throw new Error("Erro ao buscar métricas");
-        }
-
+        });
         return response;
     } catch (error) {
-        throw new Error(error.message || "Erro de conexão com o servidor.");
+        throw new Error(error.message || "Erro ao carregar histórico.");
     }
 }
 
-export { GetMetrics, GetIncidentInvolved };
+
+async function GetUser(id_user) {
+    try {
+        const response = await api(`/api/v1/users/${id_user}`, {
+            method: "GET",
+            credentials: 'include'
+        });
+
+        if (!response) {
+            throw new Error("Usuário não encontrado.");
+        }
+
+        if (response.ok === false) {
+            if (response.status === 404) {
+                throw new Error("Usuário não encontrado.");
+            }
+            throw new Error(`Erro ${response.status} ao buscar usuário.`);
+        }
+        return response;
+    } catch (error) {
+        throw new Error(error.message || "Erro ao buscar usuário.");
+    }
+}
+
+
+export { GetMetrics, GetIncidentInvolved, GetUser };

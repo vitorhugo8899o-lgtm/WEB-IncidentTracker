@@ -9,6 +9,8 @@ import HomeNexusTracker from "./pages/Home.jsx";
 import FetchCall from "./pages/FetchCall.jsx";
 import ResolverChamado from "./pages/ResolveIncident.jsx";
 import MetricsPage from "./pages/TechMetrics.jsx";
+import HistoryPage from "./pages/HistoricIncident.jsx";
+import UserSearchPage from "./pages/UserSearch.jsx";
 
 const routers = createBrowserRouter([
 	{
@@ -38,6 +40,14 @@ const routers = createBrowserRouter([
 	{
 		path: "/metricas",
 		element: <MetricsPage />
+	},
+	{
+		path: "/historico",
+		element: <HistoryPage />
+	},
+	{
+		path: "/buscar-usuario",
+		element: <UserSearchPage />
 	}
 ]);
 
