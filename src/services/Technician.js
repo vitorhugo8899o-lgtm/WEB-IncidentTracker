@@ -74,4 +74,24 @@ async function GetUser(id_user) {
 }
 
 
-export { GetMetrics, GetIncidentInvolved, GetUser };
+async function DisableUser(id_user) {
+    try {
+        const response = await api(`/api/v1/disable/user/or/worker/${id_user}`, {
+            method: "PUT",
+            credentials: 'include'
+        })
+
+        if (response.ok === false) {
+            if (response.status === 404) {
+                throw new Error("Usuário não encontrado.");
+            }
+            throw new Error(`Erro ${response.status} ao buscar usuário.`);
+        }
+        return response;
+    } catch (error) {
+        throw new Error(error.message || "Erro ao buscar usuário.");
+    }
+}
+
+
+export { GetMetrics, GetIncidentInvolved, GetUser, DisableUser };

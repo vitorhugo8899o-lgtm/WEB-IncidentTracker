@@ -11,6 +11,7 @@ import ResolverChamado from "./pages/ResolveIncident.jsx";
 import MetricsPage from "./pages/TechMetrics.jsx";
 import HistoryPage from "./pages/HistoricIncident.jsx";
 import UserSearchPage from "./pages/UserSearch.jsx";
+import DisableUserPage from "./pages/DisableUser.jsx";
 
 const routers = createBrowserRouter([
 	{
@@ -48,6 +49,10 @@ const routers = createBrowserRouter([
 	{
 		path: "/buscar-usuario",
 		element: <UserSearchPage />
+	},
+	{
+		path: "/desabilitar-usuario",
+		element: <DisableUserPage />
 	}
 ]);
 
