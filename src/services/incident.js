@@ -71,11 +71,12 @@ async function QueryIncidents(filtros) {
 }
 
 
-async function ResolveIncident(id_incident) {
+async function ResolveIncident(id_incident, payload) {
     try {
-        const response = await api(`api/v1/incidents/${id_incident}`, {
+        const response = await api(`api/v1/incident/${id_incident}`, {
             method: "PUT",
-            credentials: 'include'
+            credentials: 'include',
+            body: JSON.stringify(payload)
         })
 
         return response;
@@ -95,4 +96,4 @@ async function GetHistoryIncident(id_incident) {
 }
 
 
-export { GetIncidents, CreateIncident, DeleteIncident, QueryIncidents };
+export { GetIncidents, CreateIncident, DeleteIncident, QueryIncidents, ResolveIncident };
