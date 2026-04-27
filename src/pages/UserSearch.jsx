@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GetUser } from '../services/Technician';
-import { Search, User, Mail, CreditCard, Calendar, CheckCircle, XCircle } from 'lucide-react';
+import { Search, User, Mail, CreditCard, Calendar, CheckCircle, XCircle, ArrowLeft } from 'lucide-react';
 
 const UserSearchPage = () => {
+    const navigate = useNavigate();
+
     const [searchInput, setSearchInput] = useState('');
     const [searchedUsers, setSearchedUsers] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -49,6 +52,13 @@ const UserSearchPage = () => {
     return (
         <div className="flex-1 p-8 bg-[#0b1120] min-h-screen text-white">
             <header className="mb-8">
+                <button
+                    onClick={() => navigate("/home")}
+                    className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors mb-4 group"
+                >
+                    <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+                    <span>Voltar</span>
+                </button>
                 <h1 className="text-3xl font-bold">Buscar Usuário</h1>
                 <p className="text-gray-400">Consulte informações de usuários do sistema através do ID.</p>
             </header>
