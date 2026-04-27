@@ -1,3 +1,8 @@
+import { api } from "./api";
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+
+
 export const getCookie = (name) => {
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
@@ -10,3 +15,43 @@ export const getCookie = (name) => {
 
     return null;
 };
+
+
+async function GetMetrics() {
+    try {
+        const endpoint = `${BASE_URL}/api/v1/metrics/me`;
+
+        const response = await fetch(endpoint, {
+            method: "GET",
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            throw new Error("Erro ao buscar métricas");
+        }
+
+        return response;
+    } catch (error) {
+        throw new Error(error.message || "Erro de conexão com o servidor.");
+    }
+}
+
+
+async function GetIncidentInvolved() {
+    try {
+        const response = api("/api/v1/tech/history_incident", {
+            method: "GET",
+            credentials: 'include'
+        })
+
+        if (!response.ok) {
+            throw new Error("Erro ao buscar métricas");
+        }
+
+        return response;
+    } catch (error) {
+        throw new Error(error.message || "Erro de conexão com o servidor.");
+    }
+}
+
+export { GetMetrics, GetIncidentInvolved };
