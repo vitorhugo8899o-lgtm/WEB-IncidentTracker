@@ -25,14 +25,24 @@ const HomeNexusTracker = () => {
     const [erroPadrao, setErroPadrao] = useState(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+    const [userPermissions, setUserPermissions] = useState({
+        isTechnicalStaff: false,
+        isSupervisor: false
+    });
+
     const [novoTitulo, setNovoTitulo] = useState('');
     const [novaDescricao, setNovaDescricao] = useState('');
 
     const navigate = useNavigate();
 
-    const userRole = getCookie('Info_Role');
-    const isTechnicalStaff = userRole === 'UserRole.TECHNICIAN' || userRole === 'UserRole.SUPERVISOR';
-    const isSupervisor = userRole === 'UserRole.SUPERVISOR';
+    useEffect(() => {
+        const userRole = getCookie('Info_Role');
+
+        setUserPermissions({
+            isTechnicalStaff: userRole === 'UserRole.TECHNICIAN' || userRole === 'UserRole.SUPERVISOR',
+            isSupervisor: userRole === 'UserRole.SUPERVISOR'
+        });
+    }, []);
 
     useEffect(() => {
         const carregarChamados = async () => {
@@ -154,7 +164,7 @@ const HomeNexusTracker = () => {
                             <span className="font-medium">Criar Chamado</span>
                         </button>
 
-                        {isTechnicalStaff && (
+                        {userPermissions.isTechnicalStaff && (
                             <div className="pt-4 mt-4 border-t border-slate-800/50 space-y-2">
                                 <p className="px-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Área Técnica</p>
 
@@ -175,7 +185,7 @@ const HomeNexusTracker = () => {
                                     <span className="font-medium">Histórico</span>
                                 </button>
 
-                                {isSupervisor && (
+                                {userPermissions.isSupervisor && (
                                     <>
                                         <div className="pt-2 mt-2 border-t border-slate-800/30"></div>
                                         <button onClick={() => { navigate("/buscar-usuario"); setIsMenuOpen(false); }} className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-slate-800/50 text-slate-400 hover:text-amber-400 transition-colors">
